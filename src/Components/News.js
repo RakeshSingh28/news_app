@@ -8,8 +8,32 @@ export class News extends Component {
     this.state = {
       articles: [],
       loading: false,
+      page: 1,
     };
   }
+  loadNewsData = async (pageNo) => {
+    let data = await fetch(
+      `https://newsapi.org/v2/top-headlines?country=in&apiKey=b4bb76ff9ac148739dd5b724d02848a7&page=${pageNo}&pageSize=10`
+    );
+    let parsedData = await data.json();
+    article = parsedData.articles;
+    this.setState({
+      articles: article,
+      loading: false,
+      page: pageNo,
+      totalResults: parsedData.totalResults,
+    });
+  };
+  handlePrevClick = () => {
+    this.setState({ page: this.state.page - 1 });
+    this.loadNewsData(this.state.page - 1);
+  };
+  handleNextClick = () => {
+    if (this.state.page + 1 <= Math.ceil(this.state.totalResults / 10)) {
+      this.setState({ page: this.state.page + 1 });
+      this.loadNewsData(this.state.page + 1);
+    }
+  };
   render() {
     let { title } = this.props;
     return (
@@ -44,16 +68,31 @@ export class News extends Component {
             })}
           </div>
         </div>
+        <div className="container d-flex justify-content-between my-1">
+          <button
+            disabled={this.state.page <= 1}
+            type="button"
+            className="btn btn-outline-dark"
+            onClick={this.handlePrevClick}
+          >
+            &larr; Previous
+          </button>
+          <button
+            disabled={
+              !(this.state.page + 1 <= Math.ceil(this.state.totalResults / 10))
+            }
+            type="button"
+            className="btn btn-outline-dark"
+            onClick={this.handleNextClick}
+          >
+            Next &rarr;
+          </button>
+        </div>
       </div>
     );
   }
   async componentDidMount() {
-    let data = await fetch(
-      "https://newsapi.org/v2/top-headlines?country=in&apiKey=b4bb76ff9ac148739dd5b724d02848a7"
-    );
-    let parsedData = await data.json();
-    article = parsedData.articles;
-    this.setState({ articles: article, loading: false });
+    this.loadNewsData(this.state.page);
   }
 }
 

@@ -8,7 +8,7 @@ export default class App extends Component {
     return (
       <div>
         <Navbar />
-        <News title="News Category 1" />
+        <News title="Top Headlines" />
       </div>
     );
   }
