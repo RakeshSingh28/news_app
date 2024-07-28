@@ -1,11 +1,11 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export class Navbar extends Component {
   render() {
-    let navBarItems = [
+    const navBarItems = [
       "Business",
       "Entertainment",
-      "General",
       "Health",
       "Science",
       "Sports",
@@ -16,9 +16,9 @@ export class Navbar extends Component {
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container-fluid">
-            <a className="navbar-brand" href="/home">
+            <Link className="navbar-brand" to="/home">
               NewsMonkey
-            </a>
+            </Link>
             <button
               className="navbar-toggler"
               type="button"
@@ -35,12 +35,12 @@ export class Navbar extends Component {
               id="navbarSupportedContent"
             >
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                {navBarItems.map((item) => {
+                {navBarItems.map((item, index) => {
                   return (
-                    <li className="nav-item">
-                      <a className="nav-link" href={`/${item}`}>
+                    <li className="nav-item" key={index}>
+                      <Link className="nav-link" to={`/${item.toLowerCase()}`}>
                         {item}
-                      </a>
+                      </Link>
                     </li>
                   );
                 })}
