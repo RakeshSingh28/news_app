@@ -3,6 +3,7 @@ import Newsitem from "./Newsitem";
 import PropTypes from "prop-types";
 
 let article = [];
+let pageTitle = document.title;
 export class News extends Component {
   static defaultProps = {
     country: "in",
@@ -16,13 +17,16 @@ export class News extends Component {
     title: PropTypes.string,
     category: PropTypes.string,
   };
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       articles: [],
       loading: false,
       page: 1,
     };
+    document.title = `${
+      this.props.category.charAt(0).toUpperCase() + this.props.category.slice(1)
+    } | ${pageTitle}`;
   }
   loadNewsData = async () => {
     this.setState({ loading: true });

@@ -21,7 +21,7 @@ export default class App extends Component {
           <Routes>
             <Route
               exact
-              path="/home"
+              path="/"
               element={
                 <News
                   key="general"
