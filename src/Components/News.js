@@ -58,7 +58,7 @@ export class News extends Component {
             dataLength={this.state.articles.length}
             next={this.fetchMoreData}
             hasMore={this.state.articles.length <= this.state.totalResults}
-            loader={<h4>Loading...</h4>}
+            loader={this.state.page > 1 && <h4>Loading...</h4>}
           >
             <div className="container">
               <div className="row">

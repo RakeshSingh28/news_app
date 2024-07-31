@@ -5,7 +5,7 @@ export class Spinner extends Component {
     return (
       <div
         className="container d-flex justify-content-center align-items-center"
-        style={{ height: "100vh" }}
+        style={{ height: "88vh" }}
       >
         <div
           className="spinner-border"
