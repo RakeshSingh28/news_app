@@ -31,10 +31,13 @@ export class News extends Component {
       this.props.category.charAt(0).toUpperCase() + this.props.category.slice(1)
     } | ${pageTitle}`;
   }
-  loadNewsData = async () => {
+  loadNewsData = async (pageNo, isScrolled = false) => {
+    this.props.setProgress(!isScrolled ? 10 : 0);
+    //Use Api Key stored in .env.local file
     const data = await fetch(
-      `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=b4bb76ff9ac148739dd5b724d02848a7&page=${this.state.page}&pageSize=${this.props.pageSize}`
+      `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=b4bb76ff9ac148739dd5b724d02848a7&page=${pageNo}&pageSize=${this.props.pageSize}`
     );
+    this.props.setProgress(!isScrolled ? 60 : 0);
     const parsedData = await data.json();
     article = parsedData.articles;
     this.setState({
@@ -42,10 +45,11 @@ export class News extends Component {
       loading: false,
       totalResults: parsedData.totalResults,
     });
+    this.props.setProgress(!isScrolled ? 100 : 0);
   };
   fetchMoreData = () => {
     this.setState({ page: this.state.page + 1, loading: true });
-    this.loadNewsData();
+    this.loadNewsData(this.state.page + 1, true);
   };
   render() {
     let { title } = this.props;
@@ -100,7 +104,7 @@ export class News extends Component {
     );
   }
   componentDidMount() {
-    this.loadNewsData();
+    this.loadNewsData(1);
   }
 }
 
