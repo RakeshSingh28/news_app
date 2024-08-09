@@ -13,7 +13,7 @@ export class Navbar extends Component {
       "About",
     ];
     return (
-      <div style={{position: 'sticky', top: '0px', zIndex: '3'}}>
+      <div style={{ position: "sticky", top: "0px", zIndex: "3" }}>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container-fluid">
             <Link className="navbar-brand" to="/">

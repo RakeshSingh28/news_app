@@ -41,7 +41,7 @@ export class News extends Component {
     const parsedData = await data.json();
     article = parsedData.articles;
     this.setState({
-      articles: this.state.articles.concat(article),
+      articles: isScrolled ? this.state.articles.concat(article) : article,
       loading: false,
       totalResults: parsedData.totalResults,
     });
@@ -57,14 +57,17 @@ export class News extends Component {
       <div>
         <h1 className="d-flex justify-content-center">{title}</h1>
         {this.state.loading && <Spinner />}
-        <div className="container text-center">
+        <div
+          className="container text-center m-0 d-flex justify-content-center"
+          style={{ maxWidth: "100vw" }}
+        >
           <InfiniteScroll
             dataLength={this.state.articles.length}
             next={this.fetchMoreData}
             hasMore={this.state.articles.length <= this.state.totalResults}
             loader={this.state.page > 1 && <h4>Loading...</h4>}
           >
-            <div className="container">
+            <div className="container" style={{ maxWidth: "100vw" }}>
               <div className="row">
                 {this.state.articles.map((element) => {
                   return (

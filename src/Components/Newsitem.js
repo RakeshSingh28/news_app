@@ -7,7 +7,7 @@ export class Newsitem extends Component {
     return (
       <div className="my-2">
         <span
-          className="position-relative start-50 translate-middle badge rounded-pill bg-dark"
+          className="position-relative start-50 translate-middle badge rounded-pill bg-danger"
           style={{ zIndex: "1", top: "22px" }}
         >
           {source}
