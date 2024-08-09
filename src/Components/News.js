@@ -6,6 +6,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 let article = [];
 let pageTitle = document.title;
+const apiKey = process.env.REACT_APP_NEWS_API_KEY;
 export class News extends Component {
   static defaultProps = {
     country: "in",
@@ -35,7 +36,7 @@ export class News extends Component {
     this.props.setProgress(!isScrolled ? 10 : 0);
     //Use Api Key stored in .env.local file
     const data = await fetch(
-      `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=b4bb76ff9ac148739dd5b724d02848a7&page=${pageNo}&pageSize=${this.props.pageSize}`
+      `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${apiKey}&page=${pageNo}&pageSize=${this.props.pageSize}`
     );
     this.props.setProgress(!isScrolled ? 60 : 0);
     const parsedData = await data.json();
