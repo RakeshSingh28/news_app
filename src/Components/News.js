@@ -66,7 +66,7 @@ export class News extends Component {
             dataLength={this.state.articles.length}
             next={this.fetchMoreData}
             hasMore={this.state.articles.length <= this.state.totalResults}
-            loader={this.state.page > 1 && <h4>Loading...</h4>}
+            loader={this.state.page > 1 && this.state.articles.length !== this.state.totalResults && <h4>Loading...</h4>}
           >
             <div className="container" style={{ maxWidth: "100vw" }}>
               <div className="row">
