@@ -34,7 +34,6 @@ export class News extends Component {
   }
   loadNewsData = async (pageNo, isScrolled = false) => {
     this.props.setProgress(!isScrolled ? 10 : 0);
-    //Use Api Key stored in .env.local file
     const data = await fetch(
       `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${apiKey}&page=${pageNo}&pageSize=${this.props.pageSize}`
     );
@@ -49,8 +48,8 @@ export class News extends Component {
     this.props.setProgress(!isScrolled ? 100 : 0);
   };
   fetchMoreData = () => {
-    this.setState({ page: this.state.page + 1, loading: true });
     this.loadNewsData(this.state.page + 1, true);
+    this.setState({ page: this.state.page + 1, loading: true });
   };
   render() {
     let { title } = this.props;
@@ -66,7 +65,12 @@ export class News extends Component {
             dataLength={this.state.articles.length}
             next={this.fetchMoreData}
             hasMore={this.state.articles.length <= this.state.totalResults}
-            loader={this.state.page > 1 && this.state.articles.length !== this.state.totalResults && <h4>Loading...</h4>}
+            loader={
+              this.state.page > 1 &&
+              this.state.articles.length !== this.state.totalResults && (
+                <h4>Loading...</h4>
+              )
+            }
           >
             <div className="container" style={{ maxWidth: "100vw" }}>
               <div className="row">
