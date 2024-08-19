@@ -10,7 +10,7 @@ const About = () => {
     <div className="container mt-5">
       <div className="row">
         <div className="col-md-8 offset-md-2 text-center">
-          <h1>About NewsMonkey</h1>
+          <h1 className="mt-2">About NewsMonkey</h1>
           <img
             alt="icon"
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsaELOjlZiUW-t2DoNxG1ZHTCG9n6jky5dWg&s"
