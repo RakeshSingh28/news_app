@@ -18,7 +18,6 @@ const Navbar = () => {
           <img
             alt="icon"
             className="me-1"
-            style={{ mixBlendMode: "luminosity" }}
             height={40}
             width={40}
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsaELOjlZiUW-t2DoNxG1ZHTCG9n6jky5dWg&s"
